@@ -22,10 +22,20 @@ def generate_launch_description():
                 # Other settings are available but this will do for now.
                 # "format": "RGB888",
                 # These two can be set to anything that the camera supports.
-                # 'width': 320, 'height': 240
+                # 'width': 320,
+                # 'height': 240
                 parameters=[
-                    {"camera": 0, "format": "RGB888", "width": 320, "height": 240}
+#                    {"camera": 0, "format": "RGB888", "width": 320, "height": 240}
+                    {"camera": 0, "format": "RGB888", "width": 1280, "height": 720}
                 ],
+                extra_arguments=[{"use_intra_process_comms": True}],
+            ),
+            ComposableNode(
+                package="image_tools",
+                plugin="image_tools::ShowImage",
+                name="showimage",
+                remappings=[("/image", "/camera_node/image_raw")],
+                parameters=[{"history": "keep_last"}],
                 extra_arguments=[{"use_intra_process_comms": True}],
             ),
         ],
