@@ -25,8 +25,7 @@ def generate_launch_description():
                 # 'width': 320,
                 # 'height': 240
                 parameters=[
-#                    {"camera": 0, "format": "RGB888", "width": 320, "height": 240}
-                    {"camera": 0, "format": "RGB888", "width": 1280, "height": 720}
+                    {"camera": 0, "format": "BGR888", "width": 1280, "height": 720}
                 ],
                 extra_arguments=[{"use_intra_process_comms": True}],
             ),

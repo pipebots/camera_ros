@@ -24,7 +24,9 @@ def generate_launch_description():
                 # These two can be set to anything that the camera supports.
                 # 'width': 320, 'height': 240
                 parameters=[
-                    {"camera": 0, "format": "RGB888", "width": 320, "height": 240}
+                    {"camera": 0, "format": "BGR888", "width": 320, "height": 240}
+                    # Too slow
+                    # {"camera": 0, "format": "BGR888", "width": 640, "height": 480},
                 ],
                 extra_arguments=[{"use_intra_process_comms": True}],
             ),
