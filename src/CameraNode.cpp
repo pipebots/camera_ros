@@ -477,10 +477,10 @@ CameraNode::declareParameters()
     rcl_interfaces::msg::ParameterDescriptor param_descr;
     param_descr.description = cv_descr;
     if (range_int.from_value != range_int.to_value) {
-      param_descr.integer_range = {range_int}
+      param_descr.integer_range = {range_int};
     }
     if (range_float.from_value != range_float.to_value) {
-      param_descr.floating_point_range = {range_float}
+      param_descr.floating_point_range = {range_float};
     }
 
     // declare parameters and set default or initial value
