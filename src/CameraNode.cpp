@@ -95,7 +95,7 @@ private:
   // timestamp offset (ns) from camera time to system time
   int64_t time_offset = 0;
 
-  rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr pub_image;
+  // rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr pub_image;
   rclcpp::Publisher<sensor_msgs::msg::CompressedImage>::SharedPtr pub_image_compressed;
   rclcpp::Publisher<sensor_msgs::msg::CameraInfo>::SharedPtr pub_ci;
 
@@ -170,7 +170,7 @@ CameraNode::CameraNode(const rclcpp::NodeOptions & options)
   declare_parameter("camera", rclcpp::ParameterValue {}, param_descr_ro.set__dynamic_typing(true));
 
   // publisher for raw and compressed image
-  pub_image = this->create_publisher<sensor_msgs::msg::Image>("~/image_raw", 1);
+  // pub_image = this->create_publisher<sensor_msgs::msg::Image>("~/image_raw", 1);
   pub_image_compressed =
     this->create_publisher<sensor_msgs::msg::CompressedImage>("~/image_raw/compressed", 1);
   pub_ci = this->create_publisher<sensor_msgs::msg::CameraInfo>("~/camera_info", 1);
@@ -576,9 +576,9 @@ CameraNode::requestComplete(libcamera::Request * request)
         memcpy(msg_img_compressed->data.data(), buffer_info[buffer].data, bytesused);
 
         // decompress into raw rgb8 image
-        if (pub_image->get_subscription_count()) {
-          cv_bridge::toCvCopy(*msg_img_compressed, "rgb8")->toImageMsg(*msg_img);
-        }
+        // if (pub_image->get_subscription_count()) {
+        //   cv_bridge::toCvCopy(*msg_img_compressed, "rgb8")->toImageMsg(*msg_img);
+        // }
       } else {
         throw std::runtime_error(
                 "unsupported pixel format: " +
@@ -587,7 +587,7 @@ CameraNode::requestComplete(libcamera::Request * request)
 
       // pub_image->publish(std::move(msg_img));
       pub_image_compressed->publish(std::move(msg_img_compressed));
-      RCLCPP_INFO_STREAM(get_logger(), "Published frame");
+      // RCLCPP_INFO_STREAM(get_logger(), "Published frame");
 
       sensor_msgs::msg::CameraInfo ci = cim.getCameraInfo();
       ci.header = hdr;
