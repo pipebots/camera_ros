@@ -585,8 +585,9 @@ CameraNode::requestComplete(libcamera::Request * request)
                 stream->configuration().pixelFormat.toString());
       }
 
-      pub_image->publish(std::move(msg_img));
+      // pub_image->publish(std::move(msg_img));
       pub_image_compressed->publish(std::move(msg_img_compressed));
+      RCLCPP_INFO_STREAM(get_logger(), "Published frame");
 
       sensor_msgs::msg::CameraInfo ci = cim.getCameraInfo();
       ci.header = hdr;
