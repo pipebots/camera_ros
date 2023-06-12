@@ -591,9 +591,10 @@ CameraNode::requestComplete(libcamera::Request * request)
       sensor_msgs::msg::CameraInfo ci = cim.getCameraInfo();
       ci.header = hdr;
       pub_ci->publish(ci);
-    } else if (request->status() == libcamera::Request::RequestCancelled) {
-      RCLCPP_ERROR_STREAM(get_logger(), "request '" << request->toString() << "' cancelled");
     }
+  } else if (request->status() == libcamera::Request::RequestCancelled) {
+    RCLCPP_ERROR_STREAM(get_logger(), "request '" << request->toString() << "' cancelled");
+  }
 
   // Pipebots HACK
   ++frame_skip_count;
